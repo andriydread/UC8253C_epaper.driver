@@ -4,7 +4,7 @@ Python library for the **WeAct 3.7" E-Paper Display (UC8253C)**.
 
 ---
 
-## 🚀 Features
+## Features
 
 - **Ping-Pong Differential Buffering**: Leverages the display's dual memory banks to calculate pixel differences, resulting in partial updates.
 - **Multiple Refresh Modes**:
@@ -16,7 +16,7 @@ Python library for the **WeAct 3.7" E-Paper Display (UC8253C)**.
 
 ---
 
-## 🛠 Hardware Setup
+## Hardware Setup
 
 ### Raspberry Pi Pinout (Default)
 
@@ -42,7 +42,7 @@ sudo raspi-config
 
 ---
 
-## 📦 Installation
+## Installation
 
 Install the required dependencies:
 
@@ -54,7 +54,7 @@ _Note: Requirements include `spidev`, `RPi.GPIO`, and `Pillow`._
 
 ---
 
-## 💻 Usage
+## Usage
 
 ### Using Full Refresh
 
@@ -81,12 +81,20 @@ with UC8253C(rotation=90) as display:
 Partial refresh is perfect for clocks or status monitors where only a small part of the screen changes.
 
 ```python
+from PIL import Image, ImageDraw
+from uc8253c import UC8253C
+
 display = UC8253C(rotation=90)
 display.set_partial_refresh()
 
 # Perform many small updates without screen flashing
 for i in range(10):
-    img = generate_dynamic_image(i)
+    # Create dynamic image (e.g., a counter)
+    img = Image.new("1", (display.width, display.height), 255)
+    draw = ImageDraw.Draw(img)
+    draw.text((10, 10), f"Iteration: {i}", fill=0)
+    
+    # Update the display without putting it to sleep immediately
     display.update(img, auto_sleep=False)
 
 display.sleep()
@@ -95,7 +103,7 @@ display.close()
 
 ---
 
-## ⚙️ Refresh Modes
+## Refresh Modes
 
 | Mode          | Flash        | Speed | Use Case                                |
 | :------------ | :----------- | :---- | :-------------------------------------- |
@@ -105,7 +113,7 @@ display.close()
 
 ---
 
-## 🧠 How it Works: Ping-Pong Buffering
+## How it Works: Ping-Pong Buffering
 
 The UC8253C controller contains two internal memory banks.
 
@@ -117,6 +125,6 @@ This significantly reduces update time and power consumption.
 
 ---
 
-## 📝 License
+## License
 
 This project is open-source. Feel free to use it in your own projects!
