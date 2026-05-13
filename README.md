@@ -1,6 +1,6 @@
 # UC8253C E-Paper Display Driver
 
-Python library for the **WeAct 3.7" E-Paper Display (UC8253C)**.
+Python library for the **WeAct 3.7" E-Paper Display (UC8253C controller chip)**.
 
 ---
 
