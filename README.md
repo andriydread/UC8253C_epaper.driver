@@ -78,8 +78,6 @@ with UC8253C(rotation=90) as display:
 
 ### Using Partial Refresh
 
-Partial refresh is perfect for clocks or status monitors where only a small part of the screen changes.
-
 ```python
 from PIL import Image, ImageDraw
 from uc8253c import UC8253C
@@ -93,7 +91,7 @@ for i in range(10):
     img = Image.new("1", (display.width, display.height), 255)
     draw = ImageDraw.Draw(img)
     draw.text((10, 10), f"Iteration: {i}", fill=0)
-    
+
     # Update the display without putting it to sleep immediately
     display.update(img, auto_sleep=False)
 
@@ -105,11 +103,11 @@ display.close()
 
 ## Refresh Modes
 
-| Mode          | Flash        | Speed | Use Case                                |
-| :------------ | :----------- | :---- | :-------------------------------------- |
-| **`FULL`**    | Yes (Multi)  | Slow  | Initial screen draw, clearing ghosting. |
-| **`FAST`**    | Yes (Single) | ~1.0s | Standard navigation, app transitions.   |
-| **`PARTIAL`** | No           | ~0.3s | Dynamic data, clocks, sensors.          |
+| Mode          | Flash          | Speed | Use Case                                |
+| :------------ | :------------- | :---- | :-------------------------------------- |
+| **`FULL`**    | Yes (Multiple) | Slow  | Initial screen draw, clearing ghosting. |
+| **`FAST`**    | Yes (Single)   | ~1.0s | Standard navigation, app transitions.   |
+| **`PARTIAL`** | No             | ~0.3s | Dynamic data, clocks, sensors.          |
 
 ---
 
