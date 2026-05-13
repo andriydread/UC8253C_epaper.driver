@@ -6,11 +6,11 @@ Python library for the **WeAct 3.7" E-Paper Display (UC8253C controller chip)**.
 
 ## Features
 
-- **Ping-Pong Differential Buffering**: Leverages the display's dual memory banks to calculate pixel differences, resulting in partial updates.
 - **Multiple Refresh Modes**:
   - `FULL`: High quality, removes ghosting (flashes).
   - `FAST`: Optimized single-flash update (~1s).
   - `PARTIAL`: Fast, partial refresh with no flashing, ideal for UI elements.
+- **Ping-Pong Differential Buffering**: Leverages the display's dual memory banks to calculate pixel differences, resulting in partial updates.
 - **Pillow (PIL) Integration**: Seamlessly render images, text, and graphics using the Pillow library.
 - **Safe Hardware Management**: Automatic deep sleep and GPIO cleanup to prevent hardware damage.
 
